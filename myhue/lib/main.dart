@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
@@ -27,12 +31,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  Future<String> getData() async {
+    http.Response response = await http.get(
+        Uri.encodeFull('http://192.168.0.123:3000/temp/get_test'),
+        headers: {"Accept": "application/json"});
+    /print(response.body);
+    List data = jsonDecode(response.body);
+    //print("###");
+    //print(data[1]['title']);
+  }
+
   var light_status = 'OFF';
 
   void _lightOn() {
     setState(() {
       light_status = 'ON';
       //calling rest api
+      getData();
     });
   }
   void _lightOff() {
@@ -109,7 +125,7 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("aditional function is needed"),
+        title: Text("additional function is needed"),
       ),
       body: Center(
         child: RaisedButton(
