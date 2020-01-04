@@ -1,7 +1,6 @@
 # controling_HUE_by_flutter
-------------------------------------
 ## 1. application UI in android
-
+![onoff_flutter](https://user-images.githubusercontent.com/46476398/71763226-de192100-2f1c-11ea-9baf-81da2453bcc4.jpg)
 ### 2. Buttons
 ### 2.1. ON-OFF button
 ```dart
@@ -39,7 +38,17 @@
 ```
 ----------------------------------------
 ## 3. Calling REST API
-    e-mail: peterhyun1234@gmail.com
+```dart
+           Future<String> getData() async {
+             var response = await http.get(
+                 Uri.encodeFull("https://jsonplaceholder.typicode.com/posts"),
+                 headers: {"Accept": "application/json"});
+             setState(() {
+               data = json.decode(response.body);
+             });
+             return "Success";
+           }
+```
 ----------------------------------------
 ## 4. contact
     e-mail: peterhyun1234@gmail.com
